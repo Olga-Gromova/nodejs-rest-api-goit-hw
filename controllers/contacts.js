@@ -1,14 +1,14 @@
-const { Contact } = require("../models/contact");
-const { HttpError, ctrlWrapper } = require("../helpers");
+const { Contact } = require('../schemas');
+const { HttpError, ctrlWrapper } = require('../helpers');
 
-// ============================== Get All
+// Get All Contacts
 
 const listContacts = async (req, res) => {
   const result = await Contact.find();
   res.json(result);
 };
 
-// ============================== Get by ID
+// Get contact by ID
 
 const getContactById = async (req, res) => {
   const { contactId } = req.params;
@@ -21,7 +21,7 @@ const getContactById = async (req, res) => {
   res.json(result);
 };
 
-// ============================== Add
+// Add contact
 
 const addContact = async (req, res) => {
   const result = await Contact.create(req.body);
@@ -29,7 +29,7 @@ const addContact = async (req, res) => {
   res.status(201).json(result);
 };
 
-// ============================== Delete
+// Delete contact
 
 const removeContact = async (req, res) => {
   const { contactId } = req.params;
@@ -40,10 +40,10 @@ const removeContact = async (req, res) => {
     throw HttpError(404, "Not found");
   }
 
-  res.json({ message: "contact deleted" });
+  res.json({ message: `Contact with id ${contactId} was deleted successfully` });
 };
 
-// ============================== Update
+// Update contact
 
 const updateContact = async (req, res) => {
   const { contactId } = req.params;
@@ -58,7 +58,7 @@ const updateContact = async (req, res) => {
   res.json(result);
 };
 
-// ============================== Update status
+// Update status
 
 const updateStatusContact = async (req, res) => {
   const { contactId } = req.params;
