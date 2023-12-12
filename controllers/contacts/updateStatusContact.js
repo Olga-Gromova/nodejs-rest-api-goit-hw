@@ -1,4 +1,4 @@
-const { Contact } = require('../../schemas');
+const { Contact } = require('../../schemas/contacts');
 const { HttpError } = require('../../helpers');
 
 const updateStatusContact = async (req, res) => {
@@ -14,6 +14,4 @@ const updateStatusContact = async (req, res) => {
   res.json(result);
 };
 
-module.exports = {
-  updateStatusContact
-};
+module.exports = updateStatusContact;

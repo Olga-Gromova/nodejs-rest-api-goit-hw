@@ -14,6 +14,4 @@ const removeContact = async (req, res) => {
 };
 
 
-module.exports = {
-  removeContact
-};
+module.exports = removeContact;

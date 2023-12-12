@@ -7,6 +7,6 @@ const updateSchema = Joi.object({
   favorite: Joi.boolean(),
 })
   .min(1)
-  .messages({ "object.min": "missing fields" });
+  .messages({ "object.min": "missing necessary fields" });
 
 module.exports = { updateSchema };

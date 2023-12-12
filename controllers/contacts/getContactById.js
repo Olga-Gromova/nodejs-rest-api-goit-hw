@@ -12,6 +12,4 @@ const getContactById = async (req, res) => {
   res.json(result);
 };
 
-module.exports = {
-  getContactById
-};
+module.exports = getContactById;

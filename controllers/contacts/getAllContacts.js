@@ -8,6 +8,4 @@ const getAllContacts = async (req, res) => {
 };
 
 
-module.exports = {
-  getAllContacts
-};
+module.exports = getAllContacts;

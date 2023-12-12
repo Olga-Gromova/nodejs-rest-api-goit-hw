@@ -14,6 +14,4 @@ const updateContact = async (req, res) => {
   res.json(result);
 };
 
-module.exports = {
-  updateContact
-};
+module.exports = updateContact;

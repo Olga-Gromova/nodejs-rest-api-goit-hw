@@ -18,4 +18,4 @@ const addSchema = Joi.object({
   favorite: Joi.boolean(),
 });
 
-module.exports = { addSchema };
+module.exports = {addSchema};

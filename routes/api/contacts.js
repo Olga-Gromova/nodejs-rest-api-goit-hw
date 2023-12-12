@@ -4,16 +4,12 @@ const {
   addSchema,
   updateSchema,
   updateStatusSchema
-} = require('../../schemas');
+} = require('../../schemas/contacts');
 const { addContact, getAllContacts, getContactById, removeContact, updateContact, updateStatusContact } = require('../../controllers/contacts');
 
 const router = express.Router();
 
-// const ctrl = require('../../controllers/contacts');
-
 router.get("/", getAllContacts);
-
-// router.get('/', ctrl.getAllContacts);
 
 router.get("/:contactId", isValidId, getContactById);
 
