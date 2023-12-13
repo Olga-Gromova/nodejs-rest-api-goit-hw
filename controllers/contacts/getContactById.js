@@ -1,9 +1,10 @@
-const { Contact } = require('../../schemas');
-const { HttpError } = require('../../helpers');
+const { Contact } = require("../../models/contacts");
+const { HttpError } = require("../../helpers");
 
 const getContactById = async (req, res) => {
   const { contactId } = req.params;
-  const result = await Contact.findOne({ _id: contactId });
+  const { _id: owner } = req.user;
+  const result = await Contact.findOne({ _id: contactId, owner });
 
   if (!result) {
     throw HttpError(404, "Not found");

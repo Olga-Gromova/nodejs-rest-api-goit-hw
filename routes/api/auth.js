@@ -1,23 +1,24 @@
-const express = require('express');
-const { register, login, getCurrent, logout, updateSubscription } = require('../../controllers/users');
-const { validateBody, authenicate } = require('../../middlewares');
-const { loginSchema, registerSchema, updateSubscriptionSchema } = require('../../schemas/user');
+const express = require("express");
+const { validateBody, authenticate } = require("../../middlewares");
+const { userJoiSchema, userSubscriptionSchema } = require("../../models/user");
 
 const router = express.Router();
 
-router.post("/signup", validateBody(registerSchema), register);
+const ctrl = require("../../controllers/users");
 
-router.post("/login", validateBody(loginSchema), login);
+router.post("/register", validateBody(userJoiSchema), ctrl.register);
 
-router.get("/current", authenicate, getCurrent);
+router.post("/login", validateBody(userJoiSchema), ctrl.login);
 
-router.post("/logout", authenicate, logout);
+router.get("/current", authenticate, ctrl.getCurrent);
+
+router.post("/logout", authenticate, ctrl.logout);
 
 router.patch(
-    "/",
-    authenicate,
-    validateBody(updateSubscriptionSchema),
-    updateSubscription
+  "/",
+  authenticate,
+  validateBody(userSubscriptionSchema),
+  ctrl.updateSubscription
 );
 
 module.exports = router;

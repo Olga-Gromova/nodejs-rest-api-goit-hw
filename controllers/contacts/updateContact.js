@@ -1,11 +1,16 @@
-const { Contact } = require('../../schemas');
-const { HttpError } = require('../../helpers');
+const { Contact } = require("../../models/contacts");
+const { HttpError } = require("../../helpers");
 
 const updateContact = async (req, res) => {
   const { contactId } = req.params;
-  const result = await Contact.findByIdAndUpdate({ _id: contactId }, req.body, {
-    new: true,
-  });
+  const { _id: owner } = req.user;
+  const result = await Contact.findOneAndUpdate(
+    { _id: contactId, owner },
+    req.body,
+    {
+      new: true,
+    }
+  );
 
   if (!result) {
     throw HttpError(404, "Not found");
