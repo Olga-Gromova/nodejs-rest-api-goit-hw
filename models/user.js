@@ -8,29 +8,61 @@ const emailRegexp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 // ========================== Mongoose schemas
 
 const userSchema = new Schema(
-  {
-    password: {
-      type: String,
-      minLength: 6,
-      required: [true, "Set password for user"],
-    },
-    email: {
-      type: String,
-      match: emailRegexp,
-      unique: true,
-      required: [true, "Email is required"],
-    },
-    subscription: {
-      type: String,
-      enum: ["starter", "pro", "business"],
-      default: "starter",
-    },
-    token: {
-      type: String,
-    },
-  },
-  { versionKey: false, timestamps: true }
+	{
+		username: {
+			type: String,
+			required: true,
+		},
+		email: {
+			type: String,
+			required: true,
+			match: emailRegexp,
+			unique: true,
+		},
+		password: {
+			type: String,
+			minlength: 6,
+			required: true,
+		},
+		subscription: {
+			type: String,
+			enum: ["starter", "pro", "business"],
+			default: "starter",
+		},
+		token: {
+			type: String,
+			default: null,
+		},
+	},
+	{ versionKey: false, timestamps: true }
 );
+
+
+
+// const userSchema = new Schema(
+//   {
+//     password: {
+//       type: String,
+//       minLength: 6,
+//       required: [true, "Set password for user"],
+//     },
+//     email: {
+//       type: String,
+//       match: emailRegexp,
+//       unique: true,
+//       required: [true, "Email is required"],
+//     },
+//     subscription: {
+//       type: String,
+//       enum: ["starter", "pro", "business"],
+//       default: "starter",
+//     },
+//     token: {
+//       type: String,
+//     },
+//   },
+//   { versionKey: false, timestamps: true }
+// );
 
 userSchema.post("save", handleMongooseError);
 
