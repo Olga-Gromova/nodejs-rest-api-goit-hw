@@ -1,4 +1,4 @@
-const { Contact } = require("../../models/contact");
+const { Contact } = require('../../models/contact');
 
 const getAllContacts = async (req, res) => {
   const { _id: owner } = req.user;
@@ -18,7 +18,10 @@ const getAllContacts = async (req, res) => {
     return res.json(filteredContacts);
   }
 
-  res.json(data);
+  // res.json(data);
+  res.status(200).json({ code: 200, message: `List of contacts is received successfully`, qty: data.length, data: data });
+
+
 };
 
 module.exports = getAllContacts;

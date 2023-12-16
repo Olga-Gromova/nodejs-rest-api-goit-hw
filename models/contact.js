@@ -1,6 +1,6 @@
-const Joi = require("joi");
-const { Schema, model } = require("mongoose");
-const handleMongooseError = require("../helpers/handleMongooseError");
+const Joi = require('joi');
+const { Schema, model } = require('mongoose');
+const handleMongooseError = require('../helpers/handleMongooseError');
 
 // Mongoose Schema
 
@@ -17,7 +17,7 @@ const contactSchema = new Schema(
     phone: {
       type: String,
       required: true,
-      match: /^\(\d{3}\) \d{3}-\d{4}$/,
+      match: /^\(\d{3}\) \d{3}-\d{2}-\d{2}$/,
     },
     favorite: {
       type: Boolean,
@@ -50,7 +50,7 @@ const addSchema = Joi.object({
   phone: Joi.string()
     .min(5)
     .max(15)
-    .pattern(/^\(\d{3}\) \d{3}-\d{4}$/)
+    .pattern(/^\(\d{3}\) \d{3}-\d{2}-\d{2}$/)
     .required()
     .messages({ "any.required": "missing required phone field" }),
 

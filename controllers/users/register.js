@@ -1,6 +1,6 @@
-const bcrypt = require("bcrypt");
-const { HttpError } = require("../../helpers");
-const { User } = require("../../models/user");
+const bcrypt = require('bcrypt');
+const { HttpError } = require('../../helpers');
+const { User } = require('../../models/user');
 
 const saltRounds = 10;
 
