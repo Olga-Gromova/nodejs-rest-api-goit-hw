@@ -6,7 +6,7 @@ const updateSubscription = async (req, res) => {
 
   await User.findByIdAndUpdate(_id, { subscription });
 
-  res.json({ message: "The subscription was updated successfully" });
+  res.status(200).json({ code: 200, message: "The subscription was updated successfully", updatedSubscription: subscription });
 };
 
 module.exports = updateSubscription;

@@ -1,4 +1,5 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 const handleMongooseError = require('../helpers/handleMongooseError');
 
 const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;	
@@ -37,7 +38,7 @@ const userSchema = new Schema(
 userSchema.post("save", handleMongooseError);
 
 
-const User = model("user", userSchema);
+const User = mongoose.model("user", userSchema);
 
 module.exports = { User };
 

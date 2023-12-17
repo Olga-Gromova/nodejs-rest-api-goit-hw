@@ -5,22 +5,20 @@ const getAllContacts = async (req, res) => {
   const { page = 1, limit = 20, favorite } = req.query;
   const skip = (page - 1) * limit;
 
-  const data = await Contact.find({ owner }, "-createdAt -updatedAt", {
+
+  const data = await Contact.find({owner}, "-createdAt -updatedAt", {
     skip,
-    limit,
+    limit   
   }).populate("owner", "email subscription");
 
   if (favorite) {
     const filteredContacts = data.filter(
       (contact) => contact.favorite === true
     );
+    return res.status(200).json({code: 200, qty: filteredContacts.length, favoriteContacts: filteredContacts});
+  };
 
-    return res.json(filteredContacts);
-  }
-
-  // res.json(data);
   res.status(200).json({ code: 200, message: `List of contacts is received successfully`, qty: data.length, data: data });
-
 
 };
 
