@@ -1,10 +1,7 @@
-const Joi = require('joi');
 const { Schema, model } = require('mongoose');
 const handleMongooseError = require('../helpers/handleMongooseError');
 
 const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;	
-
-// Mongoose Schema
 
 const userSchema = new Schema(
 	{
@@ -36,31 +33,11 @@ const userSchema = new Schema(
 	{ versionKey: false, timestamps: true }
 );
 
-// Joi Schemas
-
-const registerSchema = Joi.object({
-	username: Joi.string().min(1).required(),
-	email: Joi.string().pattern(emailRegex).required(),
-	password: Joi.string().min(6).required(),
-});
-
-const loginSchema = Joi.object({
-	email: Joi.string().pattern(emailRegex).required(),
-	password: Joi.string().min(6).required(),
-});
-const updateSubscriptionSchema = Joi.object({
-	subscription: Joi.string().valid("starter", "pro", "business").required(),
-});
 
 userSchema.post("save", handleMongooseError);
 
-const schemas = {
-	registerSchema,
-	loginSchema,
-	updateSubscriptionSchema,
-};
 
 const User = model("user", userSchema);
 
-module.exports = { User, schemas };
+module.exports = { User };
 

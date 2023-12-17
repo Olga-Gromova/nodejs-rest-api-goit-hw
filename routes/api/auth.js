@@ -7,13 +7,13 @@ const {
 	updateSubscription,
 } = require('../../controllers/users');
 const { validateBody, authenticate } = require('../../middlewares');
-const { schemas } = require('../../models/user');
+const { loginSchema, registerSchema, updateSubscriptionSchema } = require('../../schemas/users/index');
 
 const router = express.Router();
 
-router.post('/signup', validateBody(schemas.registerSchema), register);
+router.post('/signup', validateBody(registerSchema), register);
 
-router.post('/login', validateBody(schemas.loginSchema), login);
+router.post('/login', validateBody(loginSchema), login);
 
 router.get('/current', authenticate, getCurrent);
 
@@ -22,7 +22,7 @@ router.post('/logout', authenticate, logout);
 router.patch(
 	'/',
 	authenticate,
-	validateBody(schemas.updateSubscriptionSchema),
+	validateBody(updateSubscriptionSchema),
 	updateSubscription
 );
 
